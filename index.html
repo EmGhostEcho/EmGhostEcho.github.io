@@ -133,17 +133,26 @@
 
         /* ===== MAIN LAYOUT ===== */
         .main-container {
-            max-width: 1480px; /* 增加主内容的宽度，使其显得更加宽广 */
+            max-width: 1400px; /* 恢复一个对大多数屏幕更友好的宽度 */
             margin: 0 auto;
             padding: 80px 24px;
             transition: all 0.3s ease;
         }
 
-        /* 强制主内容整体向右偏移，为左侧留出更大的空间 */
+        /* 针对大屏幕 (>= 1600px) 的布局：主内容居中，导航栏在左侧留白处 */
         @media (min-width: 1600px) {
             .main-container {
-                /* 根据增加的宽度（1480px = 740px的半宽），向右偏移量适度调整 */
-                margin-left: max(auto, calc(50vw - 740px + 140px)); 
+                /* 利用 margin-left 强制将主体往右推，增加向右的偏移量 (从140px加到170px)，以扩大间距 */
+                margin-left: max(auto, calc(50vw - 700px + 170px)); 
+            }
+        }
+
+        /* 针对笔记本/中等屏幕 (1200px - 1599px) 的布局：主内容自适应，为导航栏腾出左侧空间 */
+        @media (min-width: 1200px) and (max-width: 1599px) {
+            .main-container {
+                max-width: calc(100vw - 320px); /* 减小最大宽度，为左侧留出更多空间 (从280px加到320px) */
+                margin-left: 320px; /* 增加左侧留白，扩大导航栏与主内容的间距 */
+                margin-right: auto;
             }
         }
 
@@ -401,8 +410,8 @@
         .sidebar-nav {
             position: fixed;
             top: 50%;
-            /* 导航栏直接固定在离屏幕左边缘极近的位置（固定24px） */
-            left: 24px; 
+            /* 导航栏直接贴死在左侧边缘，只留 8px 的极小缝隙 */
+            left: 8px; 
             transform: translateY(-50%);
             z-index: 100;
             background: rgba(255, 255, 255, 0.9);
@@ -416,30 +425,11 @@
             overflow-y: auto;
         }
 
-        /* 响应式：当屏幕宽度小于 1600px 时，将侧边栏变为顶部导航，而不是直接隐藏 */
-        @media (max-width: 1599px) {
-            .sidebar-nav {
-                position: relative;
-                top: 0;
-                left: 0;
-                transform: none;
-                width: 100%;
-                max-width: 1400px;
-                margin: 0 auto 40px auto;
-                border-radius: 20px;
-            }
-            .sidebar-nav ul {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-        }
-
         .sidebar-nav ul {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 12px; /* 减小间距 */
+            gap: 12px; 
         }
 
         .sidebar-nav a {
@@ -447,10 +437,10 @@
             color: var(--text-secondary);
             font-family: var(--font-heading);
             font-weight: 500;
-            font-size: 0.9rem; /* 减小字号以适应变窄的宽度 */
+            font-size: 0.9rem; 
             display: flex;
             align-items: flex-start; 
-            gap: 10px; /* 减小文字和圆点的间距 */
+            gap: 10px; 
             transition: all 0.3s ease;
             padding: 8px 12px;
             border-radius: 8px;
@@ -466,8 +456,8 @@
             border-radius: 50%;
             background: var(--text-muted);
             transition: all 0.3s ease;
-            flex-shrink: 0; /* 防止圆点被压缩 */
-            margin-top: 6px; /* 让小圆点和第一行文字对齐 */
+            flex-shrink: 0; 
+            margin-top: 6px; 
         }
 
         .sidebar-nav a:hover {
@@ -479,6 +469,35 @@
         .sidebar-nav a:hover::before {
             background: var(--accent-secondary);
             transform: scale(1.4);
+        }
+
+        /* 响应式：当屏幕宽度小于 1200px 时，将侧边栏变为顶部导航 */
+        @media (max-width: 1199px) {
+            .sidebar-nav {
+                position: relative;
+                top: 0;
+                left: 0;
+                transform: none;
+                width: 100%;
+                max-width: 100%;
+                margin: 0 auto 40px auto;
+                border-radius: 20px;
+                padding: 16px;
+            }
+            .sidebar-nav ul {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+            .sidebar-nav a {
+                padding: 8px 16px;
+                background: rgba(16, 185, 129, 0.05);
+                border: 1px solid var(--border-color);
+            }
+            .sidebar-nav a:hover {
+                transform: translateY(-2px);
+            }
         }
 
         /* Responsive hiding for sidebar */
