@@ -365,7 +365,7 @@
         }
 
         .video-single .mac-window {
-            max-width: 800px;
+            max-width: 680px; /* 从 800px 减小到 680px，使单视频在各种屏幕下看起来更克制 */
             margin: 0 auto;
         }
 
@@ -476,6 +476,9 @@
 
         /* 响应式：当屏幕宽度小于 1200px 时，将侧边栏变为顶部导航 */
         @media (max-width: 1199px) {
+            .video-single .mac-window {
+                max-width: 100%; /* 在非常小的屏幕上才允许撑满 */
+            }
             .sidebar-nav {
                 position: relative;
                 top: 0;
