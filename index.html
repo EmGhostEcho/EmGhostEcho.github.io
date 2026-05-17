@@ -117,7 +117,7 @@
 
         /* ===== MAIN LAYOUT ===== */
         .main-container {
-            max-width: 1200px;
+            max-width: 1500px;
             margin: 0 auto;
             padding: 80px 24px;
         }
@@ -222,7 +222,7 @@
             display: flex;
             flex-direction: column;
             gap: 80px;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -310,7 +310,7 @@
         }
 
         .video-single video {
-            max-width: 720px;
+            max-width: 800px;
             margin: 0 auto;
             display: block;
         }
@@ -318,8 +318,8 @@
         /* Video styling - three columns */
         .video-trio {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
             width: 100%;
         }
 
@@ -356,6 +356,71 @@
             background: rgba(14, 165, 233, 0.1);
             border-color: rgba(14, 165, 233, 0.3);
             color: var(--accent-primary);
+        }
+
+        /* ===== SIDEBAR NAVIGATION ===== */
+        .sidebar-nav {
+            position: fixed;
+            top: 50%;
+            left: 60px; /* 移到左边并留出足够的边距 */
+            transform: translateY(-50%);
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px; /* 稍微大一点的圆角 */
+            padding: 32px 24px; /* 增加内边距让它看起来更大 */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            min-width: 200px; /* 增加一点最小宽度 */
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* 增加条目之间的间距 */
+        }
+
+        .sidebar-nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-family: var(--font-heading);
+            font-weight: 500;
+            font-size: 1.1rem; /* 增大字体 */
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.3s ease;
+            padding: 10px 16px; /* 增加点击热区 */
+            border-radius: 10px;
+        }
+
+        .sidebar-nav a::before {
+            content: '';
+            display: block;
+            width: 8px; /* 稍微调大一点圆点 */
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-nav a:hover {
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.08);
+            transform: translateX(4px); /* 增加一个小位移增加交互感 */
+        }
+
+        .sidebar-nav a:hover::before {
+            background: #10b981;
+            transform: scale(1.4);
+        }
+
+        /* Responsive hiding for sidebar */
+        @media (max-width: 1600px) { /* 因为放到左侧，页面可能更早发生重叠，调整断点 */
+            .sidebar-nav {
+                display: none;
+            }
         }
 
         /* ===== FOOTER ===== */
@@ -397,6 +462,17 @@
     </style>
 </head>
 <body>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar-nav">
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#part-1">Part 1: Setup</a></li>
+            <li><a href="#part-2">Part 2: Feedback Injection</a></li>
+            <li><a href="#part-3">Part 3: Adversarial</a></li>
+            <li><a href="#part-4">Part 4: Portable Attack</a></li>
+        </ul>
+    </nav>
+
     <header class="hero">
         <div class="hero-content">
             <h1><span class="highlight">GhostEcho:</span> Characterizing Electromagnetic Tampering Threats on Portable Ultrasound Imaging and AI-Assisted Medical Diagnosis</h1>
@@ -406,7 +482,7 @@
 
     <main class="main-container">
         <!-- Overview -->
-        <section class="overview">
+        <section class="overview" id="overview">
             <div class="overview-header">
                 <div class="overview-icon">
                     <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
@@ -433,7 +509,7 @@
             <div class="demo-list">
 
                 <!-- Part 1 -->
-                <div class="demo-block">
+                <div class="demo-block" id="part-1">
                     <div class="demo-block-content">
                         <div class="demo-block-header">
                             <span class="part-number">Part 1</span>
@@ -446,14 +522,14 @@
                     <div class="video-area">
                         <div class="video-single">
                             <video controls preload="metadata">
-                                <source src="demo/01 Experimental Setup & Stripe Injection.mov" type="video/mp4">
+                                <source src="demo/01 Experimental Setup & Stripe Injection.mp4" type="video/mp4">
                             </video>
                         </div>
                     </div>
                 </div>
 
                 <!-- Part 2 -->
-                <div class="demo-block">
+                <div class="demo-block" id="part-2">
                     <div class="demo-block-content">
                         <div class="demo-block-header">
                             <span class="part-number">Part 2</span>
@@ -467,19 +543,19 @@
                         <div class="video-trio">
                             <div class="video-trio-item">
                                 <video controls preload="metadata">
-                                    <source src="demo/02 Local Artifact Injection Circle Artifact.mov" type="video/mp4">
+                                    <source src="demo/02 Local Artifact Injection Circle Artifact.mp4" type="video/mp4">
                                 </video>
                                 <span class="video-trio-label">Local Artifact</span>
                             </div>
                             <div class="video-trio-item">
                                 <video controls preload="metadata">
-                                    <source src="demo/03 EM Leakage Feedback.mov" type="video/mp4">
+                                    <source src="demo/03 EM Leakage Feedback.mp4" type="video/mp4">
                                 </video>
                                 <span class="video-trio-label">EM Leakage</span>
                             </div>
                             <div class="video-trio-item">
                                 <video controls preload="metadata">
-                                    <source src="demo/04 Global Artifact Injection.mov" type="video/mp4">
+                                    <source src="demo/04 Global Artifact Injection.mp4" type="video/mp4">
                                 </video>
                                 <span class="video-trio-label">Global Forgery</span>
                             </div>
@@ -488,7 +564,7 @@
                 </div>
 
                 <!-- Part 3 -->
-                <div class="demo-block">
+                <div class="demo-block" id="part-3">
                     <div class="demo-block-content">
                         <div class="demo-block-header">
                             <span class="part-number">Part 3</span>
@@ -501,14 +577,14 @@
                     <div class="video-area">
                         <div class="video-single">
                             <video controls preload="metadata">
-                                <source src="demo/05 Adversarial Perturbation.mov" type="video/mp4">
+                                <source src="demo/05 Adversarial Perturbation.mp4" type="video/mp4">
                             </video>
                         </div>
                     </div>
                 </div>
 
                 <!-- Part 4 -->
-                <div class="demo-block">
+                <div class="demo-block" id="part-4">
                     <div class="demo-block-content">
                         <div class="demo-block-header">
                             <span class="part-number">Part 4</span>
@@ -521,7 +597,7 @@
                     <div class="video-area">
                         <div class="video-single">
                             <video controls preload="metadata">
-                                <source src="demo/06 Portable Attack Scenario.mov" type="video/mp4">
+                                <source src="demo/06 Portable Attack Scenario.mp4" type="video/mp4">
                             </video>
                         </div>
                     </div>
