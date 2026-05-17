@@ -372,8 +372,11 @@
         /* Video styling - three columns */
         .video-trio {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* 增加最小宽度使缩略图变得更大 */
-            gap: 20px; /* 把间距减小，让视频更紧凑 */
+            /* 将 minmax 的下限从 380px 调小到 260px。
+               这样在 13寸/小屏幕上，它们可以压缩得足够小以保持在一行；
+               在大屏幕上，它们依然会等比拉伸变大 */
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+            gap: 20px; 
             width: 100%;
         }
 
