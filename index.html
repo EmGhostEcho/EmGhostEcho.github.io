@@ -3,118 +3,536 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GhostEcho - Demo Page</title>
+    <title>GhostEcho - Project Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-main: #f8fafc;
+            --bg-surface: #ffffff;
+            --bg-surface-hover: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --accent-primary: #0ea5e9;
+            --accent-secondary: #8b5cf6;
+            --accent-gradient: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            --border-color: rgba(0, 0, 0, 0.08);
+            --border-hover: rgba(0, 0, 0, 0.15);
+            
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            color: #333;
-            background-color: #fff;
-            padding: 0;
+            font-family: var(--font-body);
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--bg-main);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(14, 165, 233, 0.08), transparent 25%);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .header {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            color: #fff;
-            padding: 60px 20px;
+        ::selection {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 20px 80px;
             text-align: center;
+            position: relative;
+            border-bottom: 1px solid var(--border-color);
+            background: radial-gradient(circle at center top, rgba(14, 165, 233, 0.06) 0%, transparent 100%);
+            overflow: hidden;
         }
 
-        .header h1 {
-            font-size: 2.4em;
-            margin-bottom: 12px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-size: 50px 50px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+            z-index: 0;
+            pointer-events: none;
         }
 
-        .header .subtitle {
-            font-size: 1.1em;
-            color: #a0c4ff;
-            margin-bottom: 8px;
-        }
-
-        .header .submission-info {
-            font-size: 0.95em;
-            color: #ccc;
-            font-style: italic;
-        }
-
-        .container {
+        .hero-content {
+            position: relative;
+            z-index: 1;
             max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
+            animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .section {
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 30px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 .highlight {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            padding-right: 8px;
+        }
+
+        .hero .meta {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: var(--accent-primary);
+            display: inline-block;
+            padding: 8px 24px;
+            background: rgba(14, 165, 233, 0.08);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            border-radius: 100px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.1);
+        }
+
+        /* ===== MAIN LAYOUT ===== */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        /* ===== OVERVIEW SECTION ===== */
+        .overview {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 60px;
+            margin-bottom: 100px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        .overview::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--accent-gradient);
+        }
+
+        .overview-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
             margin-bottom: 40px;
         }
 
-        .section h2 {
-            font-size: 1.6em;
-            color: #1a1a2e;
-            margin-bottom: 16px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #e0e0e0;
+        .overview-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-secondary);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
         }
 
-        .abstract {
-            background: #f8f9fa;
-            border-left: 4px solid #0f3460;
-            padding: 24px 28px;
-            border-radius: 0 8px 8px 0;
-            font-size: 0.98em;
-            line-height: 1.9;
-            text-align: justify;
+        .overview-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--accent-secondary);
         }
 
+        .overview h2 {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .overview-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .overview-text p {
+            margin-bottom: 24px;
+        }
+
+        .overview-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .overview-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* ===== DEMO SECTION ===== */
+        .demos-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .demos-header h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .demos-header .divider {
+            width: 80px;
+            height: 4px;
+            background: var(--accent-gradient);
+            margin: 0 auto;
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(14, 165, 233, 0.4);
+        }
+
+        .demo-list {
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Individual demo block */
+        .demo-block {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 20px;
+            padding: 48px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .demo-block:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        .demo-block-content {
+            padding: 0 0 32px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            margin-bottom: 32px;
+            background: transparent;
+        }
+
+        .demo-block-header {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .part-number {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #059669; /* 深一点的绿色 */
+            background: rgba(16, 185, 129, 0.1); /* 浅绿色背景 */
+            padding: 6px 16px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-block;
+        }
+
+        .demo-block-title {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #10b981; /* 翠绿色 */
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        .demo-block-desc {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            width: 100%;
+            line-height: 1.8;
+        }
+
+        /* Video area */
+        .video-area {
+            padding: 0;
+            background: transparent;
+            width: 100%;
+        }
+
+        /* Video styling */
+        video {
+            width: 100%;
+            border-radius: 12px;
+            background: #f8fafc;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            outline: none;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        video:hover {
+            transform: scale(1.01);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .video-single video {
+            max-width: 720px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Video styling - three columns */
+        .video-trio {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            width: 100%;
+        }
+
+        .video-trio-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .video-trio-item video {
+            margin-bottom: 24px;
+            transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .video-trio-item:hover video {
+            transform: scale(1.03);
+            border-color: rgba(14, 165, 233, 0.4);
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
+        }
+
+        .video-trio-label {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 8px 20px;
+            border-radius: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .video-trio-item:hover .video-trio-label {
+            background: rgba(14, 165, 233, 0.1);
+            border-color: rgba(14, 165, 233, 0.3);
+            color: var(--accent-primary);
+        }
+
+        /* ===== FOOTER ===== */
         .footer {
             text-align: center;
-            padding: 30px 20px;
-            color: #888;
-            font-size: 0.85em;
-            border-top: 1px solid #eee;
+            padding: 60px 24px;
+            border-top: 1px solid var(--border-color);
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.02);
+        }
+
+        .footer a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color 0.2s ease, text-shadow 0.2s ease;
+        }
+
+        .footer a:hover {
+            color: var(--accent-secondary);
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .video-trio { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.8rem; }
         }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.6em;
-            }
-
-            .container {
-                padding: 24px 16px;
-            }
-
-            .abstract {
-                padding: 16px 18px;
-            }
+            .hero { padding: 80px 20px; }
+            .hero h1 { font-size: 2.2rem; }
+            .overview { padding: 40px 24px; margin-bottom: 60px; }
+            .demo-block-content, .video-area { padding: 32px 24px; }
+            .demo-block-title { font-size: 1.5rem; }
+            .part-number { padding: 4px 10px; font-size: 0.75rem; }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>GhostEcho: Electromagnetic Tampering Threats on<br>Portable Ultrasound Imaging and AI-Assisted Medical Diagnosis</h1>
-        <p class="subtitle">Paper #XXX, submitted to NDSS 2027</p>
-    </div>
+    <header class="hero">
+        <div class="hero-content">
+            <h1><span class="highlight">GhostEcho:</span> Characterizing Electromagnetic Tampering Threats on Portable Ultrasound Imaging and AI-Assisted Medical Diagnosis</h1>
+            <p class="meta">Paper #3208, submitted to NDSS 2027</p>
+        </div>
+    </header>
 
-    <div class="container">
-        <div class="section">
-            <h2>Abstract</h2>
-            <div class="abstract">
+    <main class="main-container">
+        <!-- Overview -->
+        <section class="overview">
+            <div class="overview-header">
+                <div class="overview-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <h2>Overview</h2>
+            </div>
+            <div class="overview-text">
                 <p>
-                    Diagnostic ultrasound is widely employed in clinical practice owing to its safety, portability, and real-time imaging capability. Despite its critical role in patient care, the security of ultrasound imaging against electromagnetic (EM) attacks has received insufficient attention. In this paper, we present <strong>GhostEcho</strong>, the first closed-loop, real-time electromagnetic tampering system targeting medical ultrasound imaging. GhostEcho captures unintentional EM emanations from the device's display interface to recover live screen content as visual feedback, and injects attacker-controlled artifacts into the ultrasound image via intentional electromagnetic interference (IEMI). The system further incorporates automatic parameter discovery to identify the EM leakage frequency and estimate the target's internal pulse timing without prior knowledge, enabling deployment against unfamiliar devices. Using the reconstructed display as feedback, GhostEcho adaptively adjusts artifact positions to track scene changes such as probe movement. Evaluation demonstrates that the forged artifacts are visually consistent with genuine pathological structures and can mislead both AI-based diagnostic models and clinicians, potentially fabricating or concealing pathologies and compromising clinical decisions. These findings expose a previously unrecognized security risk in medical ultrasound systems.
+                    In this paper, we present <strong>GhostEcho</strong>, the electromagnetic tampering system targeting portable medical ultrasound imaging. GhostEcho injects attacker-controlled artifacts into the ultrasound imaging pipeline via intentional electromagnetic interference (IEMI), requiring no software or network access to the target device. It supports three attack strategies of increasing stealthiness&mdash;targeted pattern injection, full-image spoofing, and physically constrained adversarial perturbations imperceptible to human operators. A reconstructed display channel derived from unintentional EM emanations provides real-time visual feedback for adaptive artifact positioning.
+                </p>
+                <p>
+                    Below we provide video demonstrations of the GhostEcho system, including: (1)&nbsp;the experimental setup showing remote EM injection through a wall, (2)&nbsp;feedback-informed injection with localized artifact injection, EM leakage reconstruction, and global image forgery, (3)&nbsp;injection of adversarial perturbations, and (4)&nbsp;a portable attack scenario where all equipment fits inside a laptop bag for covert deployment.
                 </p>
             </div>
-        </div>
-    </div>
 
-    <div class="footer">
-        <p>GhostEcho Demo Page &mdash; NDSS 2027 Submission</p>
-    </div>
+        </section>
+
+        <!-- Demos -->
+        <section class="demos">
+            <div class="demos-header">
+                <h2>Video Demonstrations</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="demo-list">
+
+                <!-- Part 1 -->
+                <div class="demo-block">
+                    <div class="demo-block-content">
+                        <div class="demo-block-header">
+                            <span class="part-number">Part 1</span>
+                            <h3 class="demo-block-title">Experimental Setup</h3>
+                        </div>
+                        <p class="demo-block-desc">
+                            This video shows the experimental setup. The attacker stands in a room holding an antenna connected to a USRP and an RF power amplifier, transmitting electromagnetic injection signals. The victim ultrasound device is placed in an adjacent room, separated by a wall. Through this remote electromagnetic injection approach, specific interference artifacts appear on the ultrasound imaging display.
+                        </p>
+                    </div>
+                    <div class="video-area">
+                        <div class="video-single">
+                            <video controls preload="metadata">
+                                <source src="demo/01 Experimental Setup & Stripe Injection.mov" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Part 2 -->
+                <div class="demo-block">
+                    <div class="demo-block-content">
+                        <div class="demo-block-header">
+                            <span class="part-number">Part 2</span>
+                            <h3 class="demo-block-title">Feedback-Informed EM Injection</h3>
+                        </div>
+                        <p class="demo-block-desc">
+                            GhostEcho establishes a closed-loop attack by capturing EM leakage from the display interface to reconstruct the ultrasound screen in real-time. Using this feedback, the attacker can inject localized artifacts (e.g., circular patterns mimicking renal hamartoma) or replace the entire ultrasound frame with a synthesized forgery.
+                        </p>
+                    </div>
+                    <div class="video-area">
+                        <div class="video-trio">
+                            <div class="video-trio-item">
+                                <video controls preload="metadata">
+                                    <source src="demo/02 Local Artifact Injection Circle Artifact.mov" type="video/mp4">
+                                </video>
+                                <span class="video-trio-label">Local Artifact</span>
+                            </div>
+                            <div class="video-trio-item">
+                                <video controls preload="metadata">
+                                    <source src="demo/03 EM Leakage Feedback.mov" type="video/mp4">
+                                </video>
+                                <span class="video-trio-label">EM Leakage</span>
+                            </div>
+                            <div class="video-trio-item">
+                                <video controls preload="metadata">
+                                    <source src="demo/04 Global Artifact Injection.mov" type="video/mp4">
+                                </video>
+                                <span class="video-trio-label">Global Forgery</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Part 3 -->
+                <div class="demo-block">
+                    <div class="demo-block-content">
+                        <div class="demo-block-header">
+                            <span class="part-number">Part 3</span>
+                            <h3 class="demo-block-title">Adversarial Perturbation</h3>
+                        </div>
+                        <p class="demo-block-desc">
+                            Injection of adversarial perturbation.
+                        </p>
+                    </div>
+                    <div class="video-area">
+                        <div class="video-single">
+                            <video controls preload="metadata">
+                                <source src="demo/05 Adversarial Perturbation.mov" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Part 4 -->
+                <div class="demo-block">
+                    <div class="demo-block-content">
+                        <div class="demo-block-header">
+                            <span class="part-number">Part 4</span>
+                            <h3 class="demo-block-title">Portable Attack Scenario</h3>
+                        </div>
+                        <p class="demo-block-desc">
+                            The attacker can use portable and compact equipment to achieve more covert electromagnetic injection. This video demonstrates that the attacker can perform the EM injection attack using a portable SDR such as HackRF One and a small power supply. All required equipment fits inside a laptop bag, which can be placed near the target ultrasound device without raising suspicion.
+                        </p>
+                    </div>
+                    <div class="video-area">
+                        <div class="video-single">
+                            <video controls preload="metadata">
+                                <source src="demo/06 Portable Attack Scenario.mov" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>GhostEcho &mdash; <a href="https://emghostecho.github.io/">https://emghostecho.github.io/</a></p>
+    </footer>
 </body>
 </html>
