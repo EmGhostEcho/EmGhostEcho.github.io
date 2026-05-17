@@ -15,11 +15,11 @@
             --text-primary: #0f172a;
             --text-secondary: #334155;
             --text-muted: #64748b;
-            --accent-primary: #0ea5e9;
-            --accent-secondary: #8b5cf6;
-            --accent-gradient: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            --border-color: rgba(0, 0, 0, 0.08);
-            --border-hover: rgba(0, 0, 0, 0.15);
+            --accent-primary: #10b981;
+            --accent-secondary: #059669;
+            --accent-gradient: linear-gradient(135deg, #34d399, #059669);
+            --border-color: rgba(16, 185, 129, 0.15);
+            --border-hover: rgba(16, 185, 129, 0.3);
             
             --font-heading: 'Outfit', sans-serif;
             --font-body: 'Inter', sans-serif;
@@ -35,8 +35,8 @@
             color: var(--text-primary);
             background-color: var(--bg-main);
             background-image: 
-                radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.08), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(14, 165, 233, 0.08), transparent 25%);
+                radial-gradient(circle at 15% 50%, rgba(16, 185, 129, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(5, 150, 105, 0.08), transparent 25%);
             background-attachment: fixed;
             -webkit-font-smoothing: antialiased;
         }
@@ -56,8 +56,24 @@
             text-align: center;
             position: relative;
             border-bottom: 1px solid var(--border-color);
-            background: radial-gradient(circle at center top, rgba(14, 165, 233, 0.06) 0%, transparent 100%);
+            background: radial-gradient(circle at center top, rgba(16, 185, 129, 0.05) 0%, transparent 100%);
             overflow: hidden;
+        }
+
+        .hero-glow-1, .hero-glow-2 {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            z-index: 0;
+            opacity: 0.6;
+            animation: float 8s infinite ease-in-out alternate;
+        }
+        .hero-glow-1 { top: -10%; left: 10%; width: 400px; height: 400px; background: rgba(52, 211, 153, 0.3); }
+        .hero-glow-2 { bottom: -10%; right: 10%; width: 500px; height: 500px; background: rgba(5, 150, 105, 0.2); animation-delay: -4s; }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, -40px) scale(1.1); }
         }
 
         .hero::before {
@@ -65,8 +81,8 @@
             position: absolute;
             inset: 0;
             background-size: 50px 50px;
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+            background-image: linear-gradient(to right, rgba(16, 185, 129, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
             mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
             -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
             z-index: 0;
@@ -105,14 +121,14 @@
         .hero .meta {
             font-family: var(--font-mono);
             font-size: 1rem;
-            color: var(--accent-primary);
+            color: var(--accent-secondary);
             display: inline-block;
             padding: 8px 24px;
-            background: rgba(14, 165, 233, 0.08);
-            border: 1px solid rgba(14, 165, 233, 0.2);
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
             border-radius: 100px;
             backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(14, 165, 233, 0.1);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
         }
 
         /* ===== MAIN LAYOUT ===== */
@@ -129,7 +145,7 @@
             border-radius: 24px;
             padding: 60px;
             margin-bottom: 100px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.05);
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(20px);
@@ -153,14 +169,14 @@
         .overview-icon {
             width: 56px;
             height: 56px;
-            background: rgba(139, 92, 246, 0.1);
-            border: 1px solid rgba(139, 92, 246, 0.2);
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--accent-secondary);
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
         }
 
         .overview-icon svg {
@@ -191,8 +207,8 @@
         }
 
         .overview-text strong {
-            color: var(--text-primary);
-            font-weight: 600;
+            color: var(--accent-secondary);
+            font-weight: 700;
         }
 
         /* ===== DEMO SECTION ===== */
@@ -215,7 +231,7 @@
             background: var(--accent-gradient);
             margin: 0 auto;
             border-radius: 2px;
-            box-shadow: 0 0 15px rgba(14, 165, 233, 0.4);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
         }
 
         .demo-list {
@@ -228,23 +244,25 @@
 
         /* Individual demo block */
         .demo-block {
-            background: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            background-color: #ffffff;
+            background-image: radial-gradient(rgba(16, 185, 129, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
+            border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 48px;
             position: relative;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .demo-block:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 12px 40px rgba(16, 185, 129, 0.1);
         }
 
         .demo-block-content {
             padding: 0 0 32px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid var(--border-color);
             margin-bottom: 32px;
             background: transparent;
         }
@@ -262,7 +280,7 @@
             font-size: 0.9rem;
             font-weight: 700;
             color: #059669; /* 深一点的绿色 */
-            background: rgba(16, 185, 129, 0.1); /* 浅绿色背景 */
+            background: rgba(16, 185, 129, 0.15); /* 浅绿色背景 */
             padding: 6px 16px;
             border-radius: 100px;
             text-transform: uppercase;
@@ -274,7 +292,7 @@
             font-family: var(--font-heading);
             font-size: 2.2rem;
             font-weight: 700;
-            color: #10b981; /* 翠绿色 */
+            color: var(--accent-secondary);
             letter-spacing: -0.01em;
             line-height: 1.2;
         }
@@ -293,33 +311,51 @@
             width: 100%;
         }
 
-        /* Video styling */
-        video {
-            width: 100%;
+        /* Mac Window styling for videos */
+        .mac-window {
+            background: #f1f5f9; /* Light mac header */
             border-radius: 12px;
-            background: #f8fafc;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            outline: none;
+            padding-top: 32px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.08);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
-
-        video:hover {
-            transform: scale(1.01);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        .mac-window:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
+        }
+        .mac-window::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 14px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ff5f56;
+            box-shadow: 16px 0 0 #ffbd2e, 32px 0 0 #27c93f;
+        }
+        .mac-window video {
+            width: 100%;
+            display: block;
+            border-radius: 0 0 12px 12px;
+            border: none;
+            background: #000; /* Black background for video letterboxing */
+            outline: none;
         }
 
-        .video-single video {
+        .video-single .mac-window {
             max-width: 800px;
             margin: 0 auto;
-            display: block;
         }
 
         /* Video styling - three columns */
         .video-trio {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 32px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* 增加最小宽度使缩略图变得更大 */
+            gap: 20px; /* 把间距减小，让视频更紧凑 */
             width: 100%;
         }
 
@@ -330,22 +366,16 @@
             width: 100%;
         }
 
-        .video-trio-item video {
+        .video-trio-item .mac-window {
             margin-bottom: 24px;
-            transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .video-trio-item:hover video {
-            transform: scale(1.03);
-            border-color: rgba(14, 165, 233, 0.4);
-            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
+            width: 100%;
         }
 
         .video-trio-label {
             font-family: var(--font-mono);
             font-size: 0.85rem;
-            color: var(--text-primary);
-            background: rgba(0, 0, 0, 0.03);
+            color: var(--text-secondary);
+            background: rgba(16, 185, 129, 0.05);
             border: 1px solid var(--border-color);
             padding: 8px 20px;
             border-radius: 100px;
@@ -353,26 +383,26 @@
         }
 
         .video-trio-item:hover .video-trio-label {
-            background: rgba(14, 165, 233, 0.1);
-            border-color: rgba(14, 165, 233, 0.3);
-            color: var(--accent-primary);
+            background: rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.4);
+            color: var(--accent-secondary);
         }
 
         /* ===== SIDEBAR NAVIGATION ===== */
         .sidebar-nav {
             position: fixed;
             top: 50%;
-            /* 使用 calc 动态计算位置：距离左侧内容区一定距离，如果不宽裕则保持 20px */
-            left: max(20px, calc((100vw - 1500px) / 2 - 240px));
+            /* 调整 calc 参数，给导航栏留出更多的可用空间 */
+            left: max(20px, calc((100vw - 1500px) / 2 - 280px));
             transform: translateY(-50%);
             z-index: 100;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
             border-radius: 16px; 
-            padding: 24px 20px; /* 恢复适中的内边距 */
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-            width: 220px; /* 恢复一个不宽不窄的舒适宽度 */
+            padding: 24px 20px; 
+            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.08);
+            width: 260px; /* 把导航栏变宽，从 220px 加宽到 260px，减少换行层数 */
         }
 
         .sidebar-nav ul {
@@ -389,35 +419,35 @@
             font-weight: 500;
             font-size: 1rem; /* 恢复适中字体 */
             display: flex;
-            align-items: center;
+            align-items: flex-start; /* 改为 flex-start 以适应多行文本 */
             gap: 12px;
             transition: all 0.3s ease;
             padding: 10px 14px;
             border-radius: 8px;
-            white-space: nowrap; 
-            overflow: hidden;
-            text-overflow: ellipsis;
+            white-space: normal; /* 允许文字换行 */
+            line-height: 1.4; /* 设置合适的行高 */
         }
 
         .sidebar-nav a::before {
             content: '';
             display: block;
-            width: 6px; /* 小圆点也改小 */
+            width: 6px; 
             height: 6px;
             border-radius: 50%;
             background: var(--text-muted);
             transition: all 0.3s ease;
             flex-shrink: 0; /* 防止圆点被压缩 */
+            margin-top: 6px; /* 让小圆点和第一行文字对齐 */
         }
 
         .sidebar-nav a:hover {
-            color: #10b981;
-            background: rgba(16, 185, 129, 0.08);
+            color: var(--accent-secondary);
+            background: rgba(16, 185, 129, 0.1);
             transform: translateX(4px);
         }
 
         .sidebar-nav a:hover::before {
-            background: #10b981;
+            background: var(--accent-secondary);
             transform: scale(1.4);
         }
 
@@ -436,18 +466,18 @@
             font-family: var(--font-mono);
             color: var(--text-muted);
             font-size: 0.9rem;
-            background: rgba(0,0,0,0.02);
+            background: rgba(16, 185, 129, 0.03);
         }
 
         .footer a {
-            color: var(--accent-primary);
+            color: var(--accent-secondary);
             text-decoration: none;
             transition: color 0.2s ease, text-shadow 0.2s ease;
         }
 
         .footer a:hover {
-            color: var(--accent-secondary);
-            text-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+            color: var(--text-primary);
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
         }
 
         /* Responsive */
@@ -471,14 +501,16 @@
     <nav class="sidebar-nav">
         <ul>
             <li><a href="#overview">Overview</a></li>
-            <li><a href="#part-1">Part 1: Setup</a></li>
-            <li><a href="#part-2">Part 2: Feedback Injection</a></li>
-            <li><a href="#part-3">Part 3: Adversarial</a></li>
-            <li><a href="#part-4">Part 4: Portable Attack</a></li>
+            <li><a href="#part-1">Part 1: Experimental Setup</a></li>
+            <li><a href="#part-2">Part 2: Feedback-Informed EM Injection</a></li>
+            <li><a href="#part-3">Part 3: Adversarial Perturbation</a></li>
+            <li><a href="#part-4">Part 4: Portable Attack Scenario</a></li>
         </ul>
     </nav>
 
     <header class="hero">
+        <div class="hero-glow-1"></div>
+        <div class="hero-glow-2"></div>
         <div class="hero-content">
             <h1><span class="highlight">GhostEcho:</span> Characterizing Electromagnetic Tampering Threats on Portable Ultrasound Imaging and AI-Assisted Medical Diagnosis</h1>
             <p class="meta">Paper #3208, submitted to NDSS 2027</p>
@@ -526,9 +558,11 @@
                     </div>
                     <div class="video-area">
                         <div class="video-single">
-                            <video controls preload="metadata">
-                                <source src="demo/01 Experimental Setup & Stripe Injection.mp4" type="video/mp4">
-                            </video>
+                            <div class="mac-window">
+                                <video controls preload="metadata">
+                                    <source src="demo/01 Experimental Setup & Stripe Injection.mp4" type="video/mp4">
+                                </video>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -547,21 +581,27 @@
                     <div class="video-area">
                         <div class="video-trio">
                             <div class="video-trio-item">
-                                <video controls preload="metadata">
-                                    <source src="demo/02 Local Artifact Injection Circle Artifact.mp4" type="video/mp4">
-                                </video>
+                                <div class="mac-window">
+                                    <video controls preload="metadata">
+                                        <source src="demo/02 Local Artifact Injection Circle Artifact.mp4" type="video/mp4">
+                                    </video>
+                                </div>
                                 <span class="video-trio-label">Local Artifact</span>
                             </div>
                             <div class="video-trio-item">
-                                <video controls preload="metadata">
-                                    <source src="demo/03 EM Leakage Feedback.mp4" type="video/mp4">
-                                </video>
+                                <div class="mac-window">
+                                    <video controls preload="metadata">
+                                        <source src="demo/03 EM Leakage Feedback.mp4" type="video/mp4">
+                                    </video>
+                                </div>
                                 <span class="video-trio-label">EM Leakage</span>
                             </div>
                             <div class="video-trio-item">
-                                <video controls preload="metadata">
-                                    <source src="demo/04 Global Artifact Injection.mp4" type="video/mp4">
-                                </video>
+                                <div class="mac-window">
+                                    <video controls preload="metadata">
+                                        <source src="demo/04 Global Artifact Injection.mp4" type="video/mp4">
+                                    </video>
+                                </div>
                                 <span class="video-trio-label">Global Forgery</span>
                             </div>
                         </div>
@@ -581,9 +621,11 @@
                     </div>
                     <div class="video-area">
                         <div class="video-single">
-                            <video controls preload="metadata">
-                                <source src="demo/05 Adversarial Perturbation.mp4" type="video/mp4">
-                            </video>
+                            <div class="mac-window">
+                                <video controls preload="metadata">
+                                    <source src="demo/05 Adversarial Perturbation.mp4" type="video/mp4">
+                                </video>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -601,9 +643,11 @@
                     </div>
                     <div class="video-area">
                         <div class="video-single">
-                            <video controls preload="metadata">
-                                <source src="demo/06 Portable Attack Scenario.mp4" type="video/mp4">
-                            </video>
+                            <div class="mac-window">
+                                <video controls preload="metadata">
+                                    <source src="demo/06 Portable Attack Scenario.mp4" type="video/mp4">
+                                </video>
+                            </div>
                         </div>
                     </div>
                 </div>
