@@ -6,7 +6,7 @@
     <title>GhostEcho - Project Page</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-main: #f8fafc;
@@ -23,6 +23,8 @@
             
             --font-heading: 'Outfit', sans-serif;
             --font-body: 'Inter', sans-serif;
+            --font-overview: 'IBM Plex Sans', var(--font-body);
+            --font-description: 'Source Sans 3', var(--font-body);
             --font-mono: 'JetBrains Mono', monospace;
         }
 
@@ -133,25 +135,19 @@
 
         /* ===== MAIN LAYOUT ===== */
         .main-container {
-            max-width: 1400px; /* 恢复一个对大多数屏幕更友好的宽度 */
+            width: 100%;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 80px 24px;
             transition: all 0.3s ease;
         }
 
-        /* 针对大屏幕 (>= 1600px) 的布局：主内容居中，导航栏在左侧留白处 */
-        @media (min-width: 1600px) {
+        /* 桌面端：主体从侧边导航右侧展开，减少两者之间的空隙 */
+        @media (min-width: 1200px) {
             .main-container {
-                /* 利用 margin-left 强制将主体往右推，增加向右的偏移量 (从140px加到170px)，以扩大间距 */
-                margin-left: max(auto, calc(50vw - 700px + 170px)); 
-            }
-        }
-
-        /* 针对笔记本/中等屏幕 (1200px - 1599px) 的布局：主内容自适应，为导航栏腾出左侧空间 */
-        @media (min-width: 1200px) and (max-width: 1599px) {
-            .main-container {
-                max-width: calc(100vw - 260px); /* 减少留白，让主内容变宽 */
-                margin-left: 260px; /* 减小间距，向左侧导航栏靠拢 (220px导航栏 + 8px边距 + 32px间距 = 260px) */
+                width: min(calc(100vw - 252px), 1880px);
+                max-width: none;
+                margin-left: 228px;
                 margin-right: auto;
             }
         }
@@ -211,9 +207,12 @@
         }
 
         .overview-text {
-            font-size: 1.1rem;
+            font-family: var(--font-overview);
+            font-size: 1.12rem;
+            font-weight: 400;
             color: var(--text-secondary);
-            line-height: 1.8;
+            line-height: 1.82;
+            letter-spacing: 0;
         }
 
         .overview-text p {
@@ -226,7 +225,7 @@
 
         .overview-text strong {
             color: var(--accent-secondary);
-            font-weight: 700;
+            font-weight: 600;
         }
 
         /* ===== DEMO SECTION ===== */
@@ -256,7 +255,8 @@
             display: flex;
             flex-direction: column;
             gap: 80px;
-            max-width: 1400px;
+            width: 100%;
+            max-width: none;
             margin: 0 auto;
         }
 
@@ -279,7 +279,8 @@
         }
 
         .demo-block-content {
-            padding: 0 0 32px;
+            width: 100%;
+            padding: 0 0 34px;
             border-bottom: 1px solid var(--border-color);
             margin-bottom: 32px;
             background: transparent;
@@ -316,10 +317,14 @@
         }
 
         .demo-block-desc {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
+            font-family: var(--font-description);
+            font-size: clamp(1.02rem, 0.98rem + 0.15vw, 1.12rem);
+            font-weight: 400;
+            color: #475569;
             width: 100%;
-            line-height: 1.8;
+            line-height: 1.78;
+            letter-spacing: 0;
+            text-wrap: pretty;
         }
 
         /* Video area */
