@@ -228,6 +228,11 @@
             font-weight: 600;
         }
 
+        .demo-block-desc strong {
+            color: var(--accent-secondary);
+            font-weight: 600;
+        }
+
         /* ===== DEMO SECTION ===== */
         .demos-header {
             text-align: center;
@@ -418,71 +423,98 @@
         .sidebar-nav {
             position: fixed;
             top: 50%;
-            /* 导航栏直接贴死在左侧边缘，只留 8px 的极小缝隙 */
-            left: 8px; 
+            left: 8px;
             transform: translateY(-50%);
             z-index: 100;
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
-            border-radius: 16px; 
-            padding: 20px 16px; 
+            border-radius: 16px;
+            padding: 20px 16px;
             box-shadow: 0 10px 40px rgba(16, 185, 129, 0.08);
-            width: 220px; 
+            width: 220px;
             max-height: 90vh;
             overflow-y: auto;
+        }
+
+        .sidebar-nav::-webkit-scrollbar { width: 3px; }
+        .sidebar-nav::-webkit-scrollbar-track { background: transparent; }
+        .sidebar-nav::-webkit-scrollbar-thumb { background: rgba(16, 185, 129, 0.2); border-radius: 10px; }
+
+        .sidebar-nav .nav-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            padding: 0 12px 10px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 12px;
         }
 
         .sidebar-nav ul {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 12px; 
+            gap: 4px;
         }
 
         .sidebar-nav a {
             text-decoration: none;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-family: var(--font-heading);
             font-weight: 500;
-            font-size: 0.9rem; 
+            font-size: 0.85rem;
             display: flex;
-            align-items: flex-start; 
-            gap: 10px; 
-            transition: all 0.3s ease;
+            align-items: flex-start;
+            gap: 10px;
+            transition: all 0.25s ease;
             padding: 8px 12px;
             border-radius: 8px;
-            white-space: normal; 
-            line-height: 1.4; 
+            white-space: normal;
+            line-height: 1.4;
         }
 
         .sidebar-nav a::before {
             content: '';
             display: block;
-            width: 6px; 
+            width: 6px;
             height: 6px;
             border-radius: 50%;
             background: var(--text-muted);
             transition: all 0.3s ease;
-            flex-shrink: 0; 
-            margin-top: 6px; 
+            flex-shrink: 0;
+            margin-top: 6px;
+            opacity: 0.3;
+        }
+
+        .sidebar-nav a.active {
+            color: var(--accent-secondary);
+            background: rgba(16, 185, 129, 0.1);
+            font-weight: 600;
+        }
+
+        .sidebar-nav a.active::before {
+            background: var(--accent-primary);
+            opacity: 1;
+            transform: scale(1.5);
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
         }
 
         .sidebar-nav a:hover {
             color: var(--accent-secondary);
-            background: rgba(16, 185, 129, 0.1);
-            transform: translateX(4px);
+            background: rgba(16, 185, 129, 0.06);
         }
 
         .sidebar-nav a:hover::before {
             background: var(--accent-secondary);
-            transform: scale(1.4);
+            opacity: 0.8;
+            transform: scale(1.2);
         }
 
-        /* 响应式：当屏幕宽度小于 1200px 时，将侧边栏变为顶部导航 */
         @media (max-width: 1199px) {
             .video-single .mac-window {
-                max-width: 100%; /* 在非常小的屏幕上才允许撑满 */
+                max-width: 100%;
             }
             .sidebar-nav {
                 position: relative;
@@ -495,6 +527,7 @@
                 border-radius: 20px;
                 padding: 16px;
             }
+            .sidebar-nav .nav-label { display: none; }
             .sidebar-nav ul {
                 flex-direction: row;
                 flex-wrap: wrap;
@@ -506,13 +539,11 @@
                 background: rgba(16, 185, 129, 0.05);
                 border: 1px solid var(--border-color);
             }
+            .sidebar-nav a::before { display: none; }
             .sidebar-nav a:hover {
                 transform: translateY(-2px);
             }
         }
-
-        /* Responsive hiding for sidebar */
-        /* 刚才这部分已经被上面的新媒体查询替代了，我们把旧的删掉 */
 
         /* ===== FOOTER ===== */
         .footer {
@@ -534,6 +565,49 @@
         .footer a:hover {
             color: var(--text-primary);
             text-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+        }
+
+        #part-5 .video-area {
+            max-width: 100%;
+        }
+
+        #part-5 .video-trio {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #part-5 .video-trio-label {
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            background: none;
+            border: none;
+            padding: 6px 0 0;
+            border-radius: 0;
+            text-align: center;
+            display: block;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        #part-5 .video-trio-label::before {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--accent-primary);
+            border-radius: 1px;
+            margin: 0 auto 10px;
+            opacity: 0.4;
+        }
+
+        #part-5 .video-trio-item:hover .video-trio-label {
+            color: var(--text-secondary);
+        }
+
+        #part-5 .video-trio-item:hover .video-trio-label::before {
+            opacity: 0.8;
         }
 
         /* Responsive */
@@ -565,12 +639,14 @@
     <main class="main-container">
         <!-- Sidebar Navigation -->
         <nav class="sidebar-nav">
+            <div class="nav-label">Navigation</div>
             <ul>
-                <li><a href="#overview">Overview</a></li>
-                <li><a href="#part-1">Part 1: Experimental Setup</a></li>
-                <li><a href="#part-2">Part 2: Feedback-Informed EM Injection</a></li>
-                <li><a href="#part-3">Part 3: Adversarial Perturbation</a></li>
-                <li><a href="#part-4">Part 4: Portable Attack Scenario</a></li>
+                <li><a href="#overview" data-section="overview">Overview</a></li>
+                <li><a href="#part-1" data-section="part-1">Part 1: Experimental Setup</a></li>
+                <li><a href="#part-2" data-section="part-2">Part 2: Feedback-Informed EM Injection</a></li>
+                <li><a href="#part-3" data-section="part-3">Part 3: Adversarial Perturbation</a></li>
+                <li><a href="#part-4" data-section="part-4">Part 4: Portable Attack Scenario</a></li>
+                <li><a href="#part-5" data-section="part-5">Part 5: Testing Other Ultrasound Devices</a></li>
             </ul>
         </nav>
 
@@ -609,7 +685,7 @@
                             <h3 class="demo-block-title">Experimental Setup</h3>
                         </div>
                         <p class="demo-block-desc">
-                            This video shows the experimental setup. The attacker stands in a room holding an antenna connected to a USRP and an RF power amplifier, transmitting electromagnetic injection signals. The victim ultrasound device is placed in an adjacent room, separated by a wall. Through this remote electromagnetic injection approach, specific interference artifacts appear on the ultrasound imaging display.
+                            This video shows the experimental setup. The attacker stands in a room holding an antenna connected to a USRP and an RF power amplifier, transmitting electromagnetic injection signals. The victim ultrasound device is placed in an adjacent room, separated by a wall. Through this remote electromagnetic injection approach, specific interference artifacts appear on the ultrasound imaging display. Notably, the injected artifacts remain clearly visible even when the attacker and the target device are <strong>separated by a wall at a distance of several meters.</strong>
                         </p>
                     </div>
                     <div class="video-area">
@@ -631,7 +707,7 @@
                             <h3 class="demo-block-title">Feedback-Informed EM Injection</h3>
                         </div>
                         <p class="demo-block-desc">
-                            GhostEcho establishes a closed-loop attack by capturing EM leakage from the display interface to reconstruct the ultrasound screen in real-time. Using this feedback, the attacker can inject localized artifacts (e.g., circular patterns mimicking renal hamartoma) or replace the entire ultrasound frame with a synthesized forgery.
+                            GhostEcho establishes a closed-loop attack by capturing EM leakage from the display interface to reconstruct the ultrasound screen in real-time. Using this feedback, the attacker can inject localized artifacts (e.g., circular patterns mimicking renal hamartoma) or replace the entire ultrasound frame with a synthesized forgery. To evaluate the impact on AI-assisted diagnosis, we extracted perturbation patterns from the artifact-injected ultrasound images and applied them to a public kidney stone dataset. The attack success rates reach 72% for ResNet-34, 46% for SqueezeNet 1.1, and 38% for DenseNet-121, demonstrating that localized electromagnetic artifacts can effectively mislead AI classifiers.
                         </p>
                     </div>
                     <div class="video-area">
@@ -672,7 +748,7 @@
                             <h3 class="demo-block-title">Adversarial Perturbation</h3>
                         </div>
                         <p class="demo-block-desc">
-                            Injection of adversarial perturbation.
+                            Injection of adversarial perturbation. We investigate whether EM injection can deliver imperceptible perturbations that deceive AI diagnostic models. The universal adversarial perturbation achieves an ASR of 83.6% in digital space and retains 60.6% after physical EM injection, with an SSIM of 0.596 and PSNR of 28.42 dB.
                         </p>
                     </div>
                     <div class="video-area">
@@ -708,6 +784,41 @@
                     </div>
                 </div>
 
+                <!-- Part 5 -->
+                <div class="demo-block" id="part-5">
+                    <div class="demo-block-content">
+                        <div class="demo-block-header">
+                            <span class="part-number">Part 5</span>
+                            <h3 class="demo-block-title">Testing Other Ultrasound Devices</h3>
+                        </div>
+                        <p class="demo-block-desc">
+                            Beyond the EDAN Acclarix AX3 evaluated in the preceding sections, we further assessed the generalizability of the proposed electromagnetic injection attack across different ultrasound imaging platforms. Specifically, <strong>we evaluated the Mindray M9CV, a cart-based ultrasound system clinically deployed in the Cardiac Intensive Care Unit (CICU) of a hospital, where it is routinely employed for inpatient examinations and intraoperative imaging.</strong> Our results show that the injected electromagnetic artifacts remain clearly discernible at a separation distance of <strong>3.5&nbsp;m</strong> between the attacking antenna and the target device. Moreover, we demonstrate the injection of localized circular artifacts, including a single circular lesion and a cluster of three circular lesions, confirming that the attack is not limited to a specific product or form factor.
+                        </p>
+                    </div>
+                    <div class="video-area">
+                        <div class="video-trio">
+                            <div class="video-trio-item">
+                                <div class="mac-window">
+                                    <img src="demo/01 3-5m_sine.png" alt="EM injection artifacts visible at 3.5m distance" style="width:100%;display:block;border-radius:0 0 12px 12px;">
+                                </div>
+                                <span class="video-trio-label">Artifacts at 3.5 m Distance</span>
+                            </div>
+                            <div class="video-trio-item">
+                                <div class="mac-window">
+                                    <img src="demo/02 circle_artifact.png" alt="Single circular artifact injected in kidney" style="width:100%;display:block;border-radius:0 0 12px 12px;">
+                                </div>
+                                <span class="video-trio-label">Single Circular Artifact</span>
+                            </div>
+                            <div class="video-trio-item">
+                                <div class="mac-window">
+                                    <img src="demo/03 three_circle_artifact.png" alt="Three circular artifacts injected in kidney" style="width:100%;display:block;border-radius:0 0 12px 12px;">
+                                </div>
+                                <span class="video-trio-label">Three Circular Artifacts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
     </main>
@@ -715,5 +826,45 @@
     <footer class="footer">
         <p>GhostEcho &mdash; <a href="https://emghostecho.github.io/">https://emghostecho.github.io/</a></p>
     </footer>
+
+    <script>
+    (function () {
+        var navLinks = document.querySelectorAll('.sidebar-nav a[data-section]');
+        var sections = [];
+        navLinks.forEach(function (link) {
+            var id = link.getAttribute('data-section');
+            var sec = document.getElementById(id);
+            if (sec) sections.push({ id: id, el: sec, link: link });
+        });
+
+        function updateActiveNav() {
+            var scrollY = window.scrollY || window.pageYOffset;
+            var current = '';
+            sections.forEach(function (s) {
+                if (scrollY >= s.el.offsetTop - 200) current = s.id;
+            });
+            navLinks.forEach(function (link) {
+                if (link.getAttribute('data-section') === current) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        var tick = false;
+        window.addEventListener('scroll', function () {
+            if (!tick) {
+                window.requestAnimationFrame(function () {
+                    updateActiveNav();
+                    tick = false;
+                });
+                tick = true;
+            }
+        });
+
+        updateActiveNav();
+    })();
+    </script>
 </body>
 </html>
